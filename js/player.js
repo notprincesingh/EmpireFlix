@@ -1,7 +1,7 @@
 'use strict';
 
 let player;
-let currentMovie = null;
+let movie;
 
 document.addEventListener("DOMContentLoaded", async () => {
 
@@ -9,11 +9,11 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     if (!loaded) return;
 
-    const movieId = Utils.getQuery("id");
+    const id = Utils.getQuery("id");
 
-    currentMovie = DB.getById(movieId);
+    movie = DB.getById(id);
 
-    if (!currentMovie) {
+    if (!movie) {
 
         window.location.replace("404.html");
 
@@ -21,29 +21,29 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     }
 
-    document.getElementById("video-title").textContent = currentMovie.title;
+    document.getElementById("title").textContent = movie.title;
 
 });
 
 function onYouTubeIframeAPIReady() {
 
-    loadMovie();
+    waitForMovie();
 
 }
 
-function loadMovie() {
+function waitForMovie() {
 
-    if (!currentMovie) {
+    if (!movie) {
 
-        setTimeout(loadMovie, 200);
+        setTimeout(waitForMovie, 100);
 
         return;
 
     }
 
-    const videoId = getYouTubeId(currentMovie.video);
+    const videoId = extractVideoId(movie.video);
 
-    player = new YT.Player("youtube-player", {
+    player = new YT.Player("player", {
 
         width: "100%",
 
@@ -55,9 +55,15 @@ function loadMovie() {
 
             autoplay: 1,
 
+            controls: 1,
+
             rel: 0,
 
             modestbranding: 1,
+
+            fs: 1,
+
+            iv_load_policy: 3,
 
             playsinline: 1
 
@@ -75,132 +81,95 @@ function loadMovie() {
 
 }
 
-function getYouTubeId(url) {
+function extractVideoId(url) {
 
-    if (url.includes("/embed/")) {
+    if (url.includes("embed/"))
 
-        return url.split("/embed/")[1].split("?")[0];
+        return url.split("embed/")[1].split("?")[0];
 
-    }
-
-    if (url.includes("watch?v=")) {
+    if (url.includes("watch?v="))
 
         return url.split("watch?v=")[1].split("&")[0];
 
-    }
-
-    if (url.includes("youtu.be/")) {
+    if (url.includes("youtu.be/"))
 
         return url.split("youtu.be/")[1].split("?")[0];
 
-    }
-
     return url;
 
-}function onPlayerReady(event) {
+}
 
-    // Resume from saved position
-    const savedTime = StorageManager.getProgress(currentMovie.id);
+function onPlayerReady() {
 
-    if (savedTime > 0) {
-        player.seekTo(savedTime, true);
-    }
-
-    // Save progress every 5 seconds
-    setInterval(() => {
-
-        if (player && player.getCurrentTime) {
-
-            StorageManager.saveProgress(
-                currentMovie.id,
-                player.getCurrentTime()
-            );
-
-        }
-
-    }, 5000);
+    console.log("EmpireFlix Player Ready");
 
 }
 
 function onPlayerStateChange(event) {
 
-    // Movie Finished
     if (event.data === YT.PlayerState.ENDED) {
 
-        StorageManager.saveProgress(currentMovie.id, 0);
-
-        if (Utils.showToast) {
-            Utils.showToast("Finished Watching");
-        }
+        console.log("Movie Finished");
 
     }
 
 }
 
-// Keyboard Shortcuts
-document.addEventListener("keydown", (e) => {
+document.addEventListener("keydown", e => {
 
     if (!player) return;
 
-    switch (e.key.toLowerCase()) {
+    switch(e.key.toLowerCase()) {
 
         case " ":
 
             e.preventDefault();
 
-            const state = player.getPlayerState();
-
-            if (state === YT.PlayerState.PLAYING) {
+            if(player.getPlayerState()===YT.PlayerState.PLAYING)
 
                 player.pauseVideo();
 
-            } else {
+            else
 
                 player.playVideo();
-
-            }
 
             break;
 
         case "arrowright":
 
-            player.seekTo(player.getCurrentTime() + 10, true);
+            player.seekTo(player.getCurrentTime()+10,true);
 
             break;
 
         case "arrowleft":
 
-            player.seekTo(player.getCurrentTime() - 10, true);
+            player.seekTo(player.getCurrentTime()-10,true);
 
             break;
 
         case "m":
 
-            if (player.isMuted()) {
+            if(player.isMuted())
 
                 player.unMute();
 
-            } else {
+            else
 
                 player.mute();
-
-            }
 
             break;
 
         case "f":
 
-            const element = document.documentElement;
+            const el=document.documentElement;
 
-            if (!document.fullscreenElement) {
+            if(!document.fullscreenElement)
 
-                element.requestFullscreen();
+                el.requestFullscreen();
 
-            } else {
+            else
 
                 document.exitFullscreen();
-
-            }
 
             break;
 
