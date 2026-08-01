@@ -1,0 +1,368 @@
+/* ==========================================
+   EmpireFlix Responsive Design
+   Dream Force Production
+========================================== */
+
+/* =========================
+   Large Desktop
+========================= */
+
+@media (max-width:1600px){
+
+.container{
+
+max-width:1400px;
+
+}
+
+}
+
+/* =========================
+   Laptop
+========================= */
+
+@media (max-width:1200px){
+
+.hero-title{
+
+font-size:56px;
+
+}
+
+.hero-content{
+
+max-width:600px;
+
+}
+
+.card{
+
+width:190px;
+
+}
+
+.backdrop-card{
+
+width:320px;
+
+}
+
+}
+
+/* =========================
+   Tablet
+========================= */
+
+@media (max-width:992px){
+
+.nav-menu{
+
+display:none;
+
+}
+
+.mobile-toggle{
+
+display:flex;
+
+}
+
+.hero-banner{
+
+height:75vh;
+
+}
+
+.hero-title{
+
+font-size:42px;
+
+}
+
+.hero-content{
+
+padding-top:120px;
+
+padding-left:30px;
+
+padding-right:30px;
+
+}
+
+.hero-synopsis{
+
+font-size:16px;
+
+}
+
+.content-row{
+
+padding:0 25px;
+
+}
+
+.card{
+
+width:170px;
+
+}
+
+.backdrop-card{
+
+width:280px;
+
+}
+
+}
+
+/* =========================
+   Mobile
+========================= */
+
+@media (max-width:768px){
+
+.site-header{
+
+height:65px;
+
+}
+
+.brand-logo{
+
+font-size:26px;
+
+}
+
+.hero-banner{
+
+height:65vh;
+
+}
+
+.hero-title{
+
+font-size:34px;
+
+}
+
+.hero-meta{
+
+gap:6px;
+
+}
+
+.hero-synopsis{
+
+font-size:15px;
+
+line-height:1.6;
+
+}
+
+.hero-actions{
+
+flex-direction:column;
+
+align-items:flex-start;
+
+}
+
+.btn{
+
+width:200px;
+
+justify-content:center;
+
+}
+
+.row-title{
+
+font-size:22px;
+
+}
+
+.card{
+
+width:145px;
+
+}
+
+.backdrop-card{
+
+width:250px;
+
+}
+
+.episode-card{
+
+flex-direction:column;
+
+}
+
+.episode-thumb{
+
+width:100%;
+
+}
+
+}
+
+/* =========================
+   Small Phones
+========================= */
+
+@media (max-width:480px){
+
+.hero-title{
+
+font-size:28px;
+
+}
+
+.hero-content{
+
+padding-top:100px;
+
+padding-left:20px;
+
+padding-right:20px;
+
+}
+
+.hero-synopsis{
+
+display:-webkit-box;
+
+-webkit-line-clamp:3;
+
+-webkit-box-orient:vertical;
+
+overflow:hidden;
+
+}
+
+.content-row{
+
+padding:0 15px;
+
+}
+
+.card{
+
+width:130px;
+
+}
+
+.backdrop-card{
+
+width:220px;
+
+}
+
+.footer-links{
+
+grid-template-columns:1fr;
+
+}
+
+}
+
+/* =========================
+   Ultra Small Devices
+========================= */
+
+@media (max-width:360px){
+
+.hero-title{
+
+font-size:24px;
+
+}
+
+.card{
+
+width:115px;
+
+}
+
+.meta-badge{
+
+font-size:10px;
+
+padding:3px 6px;
+
+}
+
+.btn{
+
+width:180px;
+
+font-size:14px;
+
+}
+
+}
+
+/* =========================
+   Landscape Phones
+========================= */
+
+@media (max-height:600px) and (orientation:landscape){
+
+.hero-banner{
+
+height:100vh;
+
+}
+
+.hero-content{
+
+padding-top:80px;
+
+}
+
+.hero-title{
+
+font-size:36px;
+
+}
+
+}
+
+/* =========================
+   4K Screens
+========================= */
+
+@media (min-width:2200px){
+
+body{
+
+font-size:18px;
+
+}
+
+.hero-title{
+
+font-size:88px;
+
+}
+
+.card{
+
+width:260px;
+
+}
+
+.backdrop-card{
+
+width:420px;
+
+}
+
+.container{
+
+max-width:1800px;
+
+}
+
+}

@@ -1,0 +1,428 @@
+/* ==========================================
+   EmpireFlix Components
+   Dream Force Production
+========================================== */
+
+/* =========================
+   Movie Cards
+========================= */
+
+.card{
+
+    position:relative;
+
+    flex:0 0 auto;
+
+    width:220px;
+
+    border-radius:12px;
+
+    overflow:hidden;
+
+    background:#111;
+
+    cursor:pointer;
+
+    transition:.35s ease;
+
+}
+
+.card:hover{
+
+    transform:translateY(-8px) scale(1.05);
+
+    box-shadow:0 20px 45px rgba(0,0,0,.45);
+
+    z-index:10;
+
+}
+
+.card-img{
+
+    width:100%;
+
+    aspect-ratio:2/3;
+
+    object-fit:cover;
+
+}
+
+/* =========================
+   Backdrop Card
+========================= */
+
+.backdrop-card{
+
+    width:360px;
+
+}
+
+.backdrop-card .card-img{
+
+    aspect-ratio:16/9;
+
+}
+
+/* =========================
+   Card Overlay
+========================= */
+
+.card-overlay{
+
+    position:absolute;
+
+    inset:0;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:flex-end;
+
+    padding:16px;
+
+    background:linear-gradient(
+
+        to top,
+
+        rgba(0,0,0,.92),
+
+        transparent 65%
+
+    );
+
+    opacity:0;
+
+    transition:.35s;
+
+}
+
+.card:hover .card-overlay{
+
+    opacity:1;
+
+}
+
+.card-title{
+
+    font-size:18px;
+
+    font-weight:700;
+
+}
+
+/* =========================
+   Progress Bar
+========================= */
+
+.progress-bar{
+
+    width:100%;
+
+    height:5px;
+
+    margin-top:10px;
+
+    border-radius:20px;
+
+    background:#333;
+
+    overflow:hidden;
+
+}
+
+.progress-fill{
+
+    height:100%;
+
+    background:#E50914;
+
+    border-radius:20px;
+
+}
+
+/* =========================
+   Hero Badges
+========================= */
+
+.meta-badge{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:5px 10px;
+
+    border-radius:4px;
+
+    border:1px solid rgba(255,255,255,.35);
+
+    font-size:12px;
+
+    color:#fff;
+
+    background:rgba(255,255,255,.08);
+
+}
+
+/* =========================
+   Glass Panels
+========================= */
+
+.glass-panel{
+
+    background:rgba(255,255,255,.05);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    backdrop-filter:blur(18px);
+
+    border-radius:16px;
+
+}
+
+/* =========================
+   Search Card
+========================= */
+
+.search-card{
+
+    overflow:hidden;
+
+    border-radius:12px;
+
+    background:#111;
+
+    transition:.3s;
+
+}
+
+.search-card:hover{
+
+    transform:translateY(-6px);
+
+}
+
+.search-info{
+
+    padding:15px;
+
+}
+
+.search-title{
+
+    font-size:18px;
+
+    font-weight:600;
+
+}
+
+.search-meta{
+
+    margin-top:8px;
+
+    color:#aaa;
+
+    font-size:13px;
+
+}
+
+/* =========================
+   Episode Card
+========================= */
+
+.episode-card{
+
+    display:flex;
+
+    gap:20px;
+
+    padding:18px;
+
+    margin-bottom:15px;
+
+    border-radius:12px;
+
+    background:#111;
+
+    transition:.3s;
+
+}
+
+.episode-card:hover{
+
+    background:#181818;
+
+}
+
+.episode-thumb{
+
+    width:240px;
+
+    border-radius:10px;
+
+    overflow:hidden;
+
+}
+
+.episode-content{
+
+    flex:1;
+
+}
+
+/* =========================
+   My List Card
+========================= */
+
+.mylist-card{
+
+    position:relative;
+
+}
+
+.remove-btn{
+
+    position:absolute;
+
+    top:10px;
+
+    right:10px;
+
+    width:36px;
+
+    height:36px;
+
+    border-radius:50%;
+
+    background:rgba(0,0,0,.65);
+
+    color:white;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+}
+
+/* =========================
+   Toast
+========================= */
+
+.toast{
+
+    position:fixed;
+
+    bottom:40px;
+
+    left:50%;
+
+    transform:translateX(-50%) translateY(30px);
+
+    padding:14px 24px;
+
+    border-radius:10px;
+
+    background:#111;
+
+    color:white;
+
+    opacity:0;
+
+    transition:.3s;
+
+    z-index:9999;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.45);
+
+}
+
+.toast.show{
+
+    opacity:1;
+
+    transform:translateX(-50%) translateY(0);
+
+}
+
+/* =========================
+   Loading Screen
+========================= */
+
+.loading-overlay{
+
+    position:fixed;
+
+    inset:0;
+
+    background:#050505;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    z-index:99999;
+
+}
+
+.loading-logo{
+
+    font-size:56px;
+
+    font-weight:800;
+
+}
+
+.loading-text{
+
+    margin-top:16px;
+
+    text-align:center;
+
+    color:#999;
+
+    letter-spacing:2px;
+
+    text-transform:uppercase;
+
+}
+
+/* =========================
+   Hover Glow
+========================= */
+
+.card::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:linear-gradient(
+
+        180deg,
+
+        transparent,
+
+        rgba(255,255,255,.08)
+
+    );
+
+    opacity:0;
+
+    transition:.35s;
+
+}
+
+.card:hover::after{
+
+    opacity:1;
+
+}
