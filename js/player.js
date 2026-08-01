@@ -55,7 +55,27 @@ function initializePlayer(movie) {
 
     title.textContent = movie.title;
 
+    if (movie.video.includes("youtube.com/embed")) {
+
+    video.style.display = "none";
+
+    youtube.style.display = "block";
+
+    youtube.src = movie.video + "?autoplay=1&rel=0";
+
+    document.querySelector(".player-controls").style.display = "none";
+
+    return;
+
+} else {
+
+    youtube.style.display = "none";
+
+    video.style.display = "block";
+
     video.src = movie.video;
+
+}
 
     video.volume = CONFIG.PLAYER.DEFAULT_VOLUME;
 
