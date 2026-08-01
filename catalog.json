@@ -1,0 +1,135 @@
+[
+  {
+    "id": "the-builder",
+
+    "type": "movie",
+
+    "status": "released",
+
+    "trending": true,
+
+    "featured": true,
+
+    "title": "THE BUILDER",
+
+    "tagline": "He's not just building AI. He's building himself.",
+
+    "description": "A teenager balances school, cricket, coding, AI and filmmaking while discovering that every challenge is shaping the person he will become.",
+
+    "year": 2026,
+
+    "releaseDate": "2026-08-01",
+
+    "runtime": "6 min",
+
+    "language": "Hinglish",
+
+    "quality": "4K HDR",
+
+    "rating": "U/A 13+",
+
+    "studio": "Dream Force Production",
+
+    "genre": [
+      "Inspirational",
+      "Drama",
+      "Short Film"
+    ],
+
+    "poster": "assets/posters/the-builder.webp",
+
+    "banner": "assets/banners/the-builder.webp",
+
+    "logo": "assets/logos/the-builder.webp",
+
+    "thumbnail": "assets/thumbnails/the-builder.webp",
+
+    "video": "assets/videos/the-builder.mp4",
+
+    "trailer": "assets/videos/the-builder-trailer.mp4",
+
+    "subtitles": "assets/subtitles/the-builder.vtt",
+
+    "credits": {
+
+      "starring": [
+        "Prince Kumar Singh"
+      ],
+
+      "director": "Prince Kumar Singh",
+
+      "writer": "Prince Kumar Singh",
+
+      "editor": "Prince Kumar Singh",
+
+      "production": "Dream Force Production"
+
+    }
+  },
+
+  {
+    "id": "the-builder-2",
+
+    "type": "movie",
+
+    "status": "coming_soon",
+
+    "trending": false,
+
+    "featured": false,
+
+    "title": "THE BUILDER II",
+
+    "tagline": "The journey continues.",
+
+    "description": "The next chapter of The Builder.",
+
+    "year": 2027,
+
+    "releaseDate": "2027-01-01",
+
+    "runtime": "TBA",
+
+    "language": "Hinglish",
+
+    "quality": "4K HDR",
+
+    "rating": "TBA",
+
+    "studio": "Dream Force Production",
+
+    "genre": [
+      "Drama"
+    ],
+
+    "poster": "assets/posters/the-builder-2.webp",
+
+    "banner": "assets/banners/the-builder-2.webp",
+
+    "logo": "assets/logos/the-builder-2.webp",
+
+    "thumbnail": "assets/thumbnails/the-builder-2.webp",
+
+    "video": "",
+
+    "trailer": "",
+
+    "subtitles": "",
+
+    "credits": {
+
+      "starring": [
+        "Prince Kumar Singh"
+      ],
+
+      "director": "Prince Kumar Singh",
+
+      "writer": "Prince Kumar Singh",
+
+      "editor": "Prince Kumar Singh",
+
+      "production": "Dream Force Production"
+
+    }
+  }
+]

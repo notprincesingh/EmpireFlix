@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>EmpireFlix Player</title>
+
+<link rel="stylesheet" href="css/global.css">
+<link rel="stylesheet" href="css/player.css">
+
+</head>
+
+<body>
+
+<div class="player-page">
+
+    <!-- Video -->
+
+    <video
+
+        id="video-player"
+
+        preload="metadata"
+
+        playsinline
+
+        controlslist="nodownload"
+
+    >
+
+        Your browser does not support HTML5 video.
+
+    </video>
+
+    <!-- Controls -->
+
+    <div class="player-controls">
+
+        <div class="top-controls">
+
+            <a
+
+                href="index.html"
+
+                class="back-btn">
+
+                ← Back
+
+            </a>
+
+            <h2
+
+                id="video-title">
+
+            </h2>
+
+        </div>
+
+        <!-- Progress -->
+
+        <div class="progress-wrapper">
+
+            <input
+
+                id="progress"
+
+                type="range"
+
+                min="0"
+
+                max="100"
+
+                value="0">
+
+        </div>
+
+        <!-- Bottom Controls -->
+
+        <div class="bottom-controls">
+
+            <button id="play-btn">
+
+                ▶
+
+            </button>
+
+            <button id="pause-btn">
+
+                ❚❚
+
+            </button>
+
+            <span id="current-time">
+
+                00:00
+
+            </span>
+
+            <span>/</span>
+
+            <span id="duration">
+
+                00:00
+
+            </span>
+
+            <button id="mute-btn">
+
+                🔊
+
+            </button>
+
+            <input
+
+                id="volume"
+
+                type="range"
+
+                min="0"
+
+                max="1"
+
+                step="0.1"
+
+                value="1">
+
+            <button id="fullscreen-btn">
+
+                ⛶
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="js/config.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/storage.js"></script>
+<script src="js/db.js"></script>
+<script src="js/player.js"></script>
+
+</body>
+</html>
