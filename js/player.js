@@ -32,6 +32,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 function initializePlayer(movie) {
 
     const video = document.getElementById("video-player");
+    
+    const youtube = document.getElementById("youtube-player");
 
     const playBtn = document.getElementById("play-btn");
 
