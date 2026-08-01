@@ -1,11 +1,7 @@
 'use strict';
 
-/*
-===========================================
-EmpireFlix Player
-Dream Force Production
-===========================================
-*/
+let player;
+let currentMovie = null;
 
 document.addEventListener("DOMContentLoaded", async () => {
 
@@ -15,252 +11,199 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const movieId = Utils.getQuery("id");
 
-    const movie = DB.getById(movieId);
+    currentMovie = DB.getById(movieId);
 
-    if (!movie) {
+    if (!currentMovie) {
 
-        window.location.href = "404.html";
+        window.location.replace("404.html");
 
         return;
 
     }
 
-    initializePlayer(movie);
+    document.getElementById("video-title").textContent = currentMovie.title;
 
 });
 
-function initializePlayer(movie) {
+function onYouTubeIframeAPIReady() {
 
-    const video = document.getElementById("video-player");
-    
-    const youtube = document.getElementById("youtube-player");
-
-    const playBtn = document.getElementById("play-btn");
-
-    const pauseBtn = document.getElementById("pause-btn");
-
-    const muteBtn = document.getElementById("mute-btn");
-
-    const fullscreenBtn = document.getElementById("fullscreen-btn");
-
-    const progress = document.getElementById("progress");
-
-    const volume = document.getElementById("volume");
-
-    const currentTime = document.getElementById("current-time");
-
-    const duration = document.getElementById("duration");
-
-    const title = document.getElementById("video-title");
-
-   if (title) {
-    title.textContent = movie.title;
-}
-
-    if (movie.video.includes("youtube.com/embed")) {
-
-    video.style.display = "none";
-
-    youtube.style.display = "block";
-
-    youtube.src = movie.video + "?autoplay=1&rel=0";
-
-    document.querySelector(".player-controls").style.display = "none";
-
-    return;
-
-} else {
-
-    youtube.style.display = "none";
-
-    video.style.display = "block";
-
-    video.src = movie.video;
+    loadMovie();
 
 }
 
-    video.volume = CONFIG.PLAYER.DEFAULT_VOLUME;
+function loadMovie() {
 
-    // Resume previous position
+    if (!currentMovie) {
 
-    const savedTime = StorageManager.getProgress(movie.id);
+        setTimeout(loadMovie, 200);
 
-    video.addEventListener("loadedmetadata", () => {
-
-        if (savedTime > 0 && savedTime < video.duration) {
-
-            video.currentTime = savedTime;
-
-        }
-
-        duration.textContent = Utils.formatTime(video.duration);
-
-    });
-
-    // Play
-
-    playBtn.onclick = () => video.play();
-
-    // Pause
-
-    pauseBtn.onclick = () => video.pause();
-
-    // Volume
-
-    volume.oninput = () => {
-
-        video.volume = volume.value;
-
-    };
-
-    // Mute
-
-    muteBtn.onclick = () => {
-
-        video.muted = !video.muted;
-
-        muteBtn.textContent = video.muted ? "🔇" : "🔊";
-
-    };
-
-    // Fullscreen
-
-    fullscreenBtn.onclick = () => {
-
-        if (!document.fullscreenElement) {
-
-            document.documentElement.requestFullscreen();
-
-        } else {
-
-            document.exitFullscreen();
-
-        }
-
-    };
-
-    // Update Progress
-
-    video.addEventListener("timeupdate", () => {
-
-        currentTime.textContent = Utils.formatTime(video.currentTime);
-
-        progress.value =
-
-            (video.currentTime / video.duration) * 100 || 0;
-
-        StorageManager.saveProgress(
-
-            movie.id,
-
-            video.currentTime
-
-        );
-
-    });
-
-    // Seek
-
-    progress.oninput = () => {
-
-        video.currentTime =
-
-            (progress.value / 100) * video.duration;
-
-    };
-
-    // Finished
-
-    video.addEventListener("ended", () => {
-
-        StorageManager.saveProgress(movie.id, 0);
-
-        Utils.showToast("Finished Watching");
-
-    });
-
-    // Keyboard Shortcuts
-
-    document.addEventListener("keydown", e => {
-
-        switch (e.key.toLowerCase()) {
-
-            case " ":
-
-                e.preventDefault();
-
-                if (video.paused)
-
-                    video.play();
-
-                else
-
-                    video.pause();
-
-                break;
-
-            case "arrowright":
-
-                video.currentTime += 10;
-
-                break;
-
-            case "arrowleft":
-
-                video.currentTime -= 10;
-
-                break;
-
-            case "m":
-
-                video.muted = !video.muted;
-
-                break;
-
-            case "f":
-
-                if (!document.fullscreenElement)
-
-                    document.documentElement.requestFullscreen();
-
-                else
-
-                    document.exitFullscreen();
-
-                break;
-
-        }
-
-    });
-
-    // Auto-hide controls
-
-    let timeout;
-
-    const controls = document.querySelector(".player-controls");
-
-    function showControls() {
-
-        controls.classList.remove("hidden");
-
-        clearTimeout(timeout);
-
-        timeout = setTimeout(() => {
-
-            if (!video.paused) {
-
-                controls.classList.add("hidden");
-
-            }
-
-        }, 3000);
+        return;
 
     }
 
-    document.addEventListener("mousemove", showControls);
+    const videoId = getYouTubeId(currentMovie.video);
 
-    document.addEventListener("touchstart", showControls);
+    player = new YT.Player("youtube-player", {
 
-    showControls();
+        width: "100%",
+
+        height: "100%",
+
+        videoId: videoId,
+
+        playerVars: {
+
+            autoplay: 1,
+
+            rel: 0,
+
+            modestbranding: 1,
+
+            playsinline: 1
+
+        },
+
+        events: {
+
+            onReady: onPlayerReady,
+
+            onStateChange: onPlayerStateChange
+
+        }
+
+    });
 
 }
+
+function getYouTubeId(url) {
+
+    if (url.includes("/embed/")) {
+
+        return url.split("/embed/")[1].split("?")[0];
+
+    }
+
+    if (url.includes("watch?v=")) {
+
+        return url.split("watch?v=")[1].split("&")[0];
+
+    }
+
+    if (url.includes("youtu.be/")) {
+
+        return url.split("youtu.be/")[1].split("?")[0];
+
+    }
+
+    return url;
+
+}function onPlayerReady(event) {
+
+    // Resume from saved position
+    const savedTime = StorageManager.getProgress(currentMovie.id);
+
+    if (savedTime > 0) {
+        player.seekTo(savedTime, true);
+    }
+
+    // Save progress every 5 seconds
+    setInterval(() => {
+
+        if (player && player.getCurrentTime) {
+
+            StorageManager.saveProgress(
+                currentMovie.id,
+                player.getCurrentTime()
+            );
+
+        }
+
+    }, 5000);
+
+}
+
+function onPlayerStateChange(event) {
+
+    // Movie Finished
+    if (event.data === YT.PlayerState.ENDED) {
+
+        StorageManager.saveProgress(currentMovie.id, 0);
+
+        if (Utils.showToast) {
+            Utils.showToast("Finished Watching");
+        }
+
+    }
+
+}
+
+// Keyboard Shortcuts
+document.addEventListener("keydown", (e) => {
+
+    if (!player) return;
+
+    switch (e.key.toLowerCase()) {
+
+        case " ":
+
+            e.preventDefault();
+
+            const state = player.getPlayerState();
+
+            if (state === YT.PlayerState.PLAYING) {
+
+                player.pauseVideo();
+
+            } else {
+
+                player.playVideo();
+
+            }
+
+            break;
+
+        case "arrowright":
+
+            player.seekTo(player.getCurrentTime() + 10, true);
+
+            break;
+
+        case "arrowleft":
+
+            player.seekTo(player.getCurrentTime() - 10, true);
+
+            break;
+
+        case "m":
+
+            if (player.isMuted()) {
+
+                player.unMute();
+
+            } else {
+
+                player.mute();
+
+            }
+
+            break;
+
+        case "f":
+
+            const element = document.documentElement;
+
+            if (!document.fullscreenElement) {
+
+                element.requestFullscreen();
+
+            } else {
+
+                document.exitFullscreen();
+
+            }
+
+            break;
+
+    }
+
+});
