@@ -53,7 +53,9 @@ function initializePlayer(movie) {
 
     const title = document.getElementById("video-title");
 
+   if (title) {
     title.textContent = movie.title;
+}
 
     if (movie.video.includes("youtube.com/embed")) {
 
